@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="DnD-5e-character-creator/DnD-5e-character-creator.vcxproj" Id="3dcb7664-b824-4f67-bf7c-0127961881c2" />
+</Solution>
