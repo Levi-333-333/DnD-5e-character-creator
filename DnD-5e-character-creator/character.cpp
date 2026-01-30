@@ -22,9 +22,3 @@ int RollDice(int face)
 	return rand() % face + 1;
 }
 
-struct Character
-{
-	string name;
-	CharacterClass charClass;
-
-};
