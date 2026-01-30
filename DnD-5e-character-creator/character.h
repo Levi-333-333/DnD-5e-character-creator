@@ -1,15 +1,11 @@
 #pragma once
-#include <ctime>
-#include <cstdlib>
 #include <iostream>
 #include <string>
 #include <vector>
 #include <map>
 using namespace std;
 
-enum CharacterClass;
-
-int RollDice(int face);
+extern vector<string> ClassesVector;
 
 struct Characteristic
 {
@@ -34,7 +30,7 @@ struct Character
 {
 	// Header
 	string name;
-	CharacterClass charClass;
+	string charClass;
 	string race;
 	string background;
 	string worldview;

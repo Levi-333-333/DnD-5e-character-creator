@@ -21,9 +21,15 @@
     <ClCompile Include="character.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="dice.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="dice.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
