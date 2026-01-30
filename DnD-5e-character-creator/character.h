@@ -6,6 +6,8 @@
 using namespace std;
 
 extern vector<string> ClassesVector;
+extern vector<string> RacesVector;
+extern vector<string> BackgroundsVector;
 
 struct Characteristic
 {
@@ -62,4 +64,7 @@ struct Character
 	string affections;
 	string weaknesses;
 	vector<string> skills;
+
+	// Functions
+	void PrintInfo();
 };
