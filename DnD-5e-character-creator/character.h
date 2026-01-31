@@ -17,6 +17,8 @@ struct Characteristic
 	int intelligence;
 	int wisdom;
 	int charisma;
+
+	Characteristic();
 };
 
 struct Wallet
@@ -32,7 +34,7 @@ struct Character
 {
 	// Header
 	string name;
-	string charClass;
+	string characterClass;
 	string race;
 	string background;
 	string worldview;
@@ -67,4 +69,13 @@ struct Character
 
 	// Functions
 	void PrintInfo();
+	// Functions for header
+	void SetName();
+	void SetCharacterClass();
+	void SetRace();
+	void SetBackground();
+	void SetWorldview();
+	void SetPlayerName();
+	void SetExperience();
+	void SetLevel();
 };
