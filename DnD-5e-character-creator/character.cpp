@@ -1000,3 +1000,54 @@ void Character::SetPassivePerception()
 	if (havePerception) passivePerception = 10 + characteristics.wisdom + masteryBonus;
 	else passivePerception = 10 + characteristics.wisdom;
 }
+
+// Сделала Рия
+void Character::SetInitiative()
+{
+	initiative += characteristics.dexterityMod;
+}
+
+// Сделала Рия
+void Character::SetClassArmor()
+{
+	for (int i = 0; i < inventory.size(); i++)
+	{
+		// Лёгкий доспех
+		if (inventory[i] == "Стёганый доспех") classArmor = 11 + characteristics.dexterityMod;
+		if (inventory[i] == "Кожаный доспех") classArmor = 11 + characteristics.dexterityMod;
+		if (inventory[i] == "Проклёпанный кожаный доспех") classArmor = 12 + characteristics.dexterityMod;
+		// Средний доспех
+		if (inventory[i] == "Шкурный доспех")
+		{
+			if (characteristics.dexterityMod > 2) classArmor = 12 + 2;
+			else classArmor = 12 + characteristics.dexterityMod;
+		}
+		if (inventory[i] == "Кольчужная рубаха")
+		{
+			if (characteristics.dexterityMod > 2) classArmor = 13 + 2;
+			else classArmor = 13 + characteristics.dexterityMod;
+		}
+		if (inventory[i] == "Чешуйчатый доспех")
+		{
+			if (characteristics.dexterityMod > 2) classArmor = 14 + 2;
+			else classArmor = 14 + characteristics.dexterityMod;
+		}
+		if (inventory[i] == "Кираса")
+		{
+			if (characteristics.dexterityMod > 2) classArmor = 14 + 2;
+			else classArmor = 14 + characteristics.dexterityMod;
+		}
+		if (inventory[i] == "Полулаты")
+		{
+			if (characteristics.dexterityMod > 2) classArmor = 15 + 2;
+			else classArmor = 15 + characteristics.dexterityMod;
+		}
+		// Тяжёлый доспех
+		if (inventory[i] == "Колечный доспех") classArmor = 14;
+		if (inventory[i] == "Кольчуга") classArmor = 16;
+		if (inventory[i] == "Наборный доспех") classArmor = 17;
+		if (inventory[i] == "Латы") classArmor = 18;
+		// Щит
+		if (inventory[i] == "Щит") classArmor += 2;
+	}
+}

@@ -88,12 +88,12 @@ struct Character
 	void SetWorldview();
 	void SetPlayerName();
 	void SetExperience(); // Пока программа не подразумевает лвлапы и/или создание персонажа уровня выше первого ф-я выполняется перед вызовом ф-ии PrintInfo() 
-	void SetLevel(int _level); // Пока программа не подразумевает лвлапы и/или создание персонажа уровня выше первого ф-я выполняется перед вызовом ф-ии PrintInfo() со значением 1
+	void SetLevel(int _level); // Пока программа не подразумевает лвлапы и/или создание персонажа уровня выше первого ф-я выполняется перед вызовом ф-ии PrintInfo() со значением 1. Приоритетнее всех
 
 	// Functions for left part of character's list
 	void SetCharacteristics();
 	void SetPassivePerception(); // Ф-я выполняется перед вызовом ф-ии PrintInfo()
-	void SetModifficators(); // Ф-я выполняется перед вызовом ф-ии PrintInfo() приоритетнее всех других подобных функций
+	void SetModifficators(); // Ф-я выполняется перед вызовом ф-ии PrintInfo() приоритетнее всех других подобных функций, кроме SetLevel
 
 	// Functions for Center part of character's list
 	void SetClassArmor(); // Ф-я выполняется перед вызовом ф-ии PrintInfo()
