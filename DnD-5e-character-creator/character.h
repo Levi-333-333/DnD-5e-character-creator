@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include "dice.h"
 using namespace std;
 
 extern vector<string> ClassesVector;
