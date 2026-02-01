@@ -28,6 +28,8 @@ struct Wallet
 	int electrum;
 	int gold;
 	int platinum;
+
+	Wallet();
 };
 
 struct Character

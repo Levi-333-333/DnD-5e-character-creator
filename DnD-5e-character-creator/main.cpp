@@ -10,5 +10,8 @@ void main()
 
 	Character character;
 
+	character.SetBackground();
+	character.SetRace();
+
 	character.PrintInfo();
 }

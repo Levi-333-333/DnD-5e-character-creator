@@ -58,12 +58,21 @@ Characteristic::Characteristic()
 	charisma = 0;
 }
 
+Wallet::Wallet()
+{
+	copper = 0;
+	silver = 0;
+	electrum = 0;
+	gold = 0;
+	platinum = 0;
+}
+
 // Зона ответственноси Дарии
 void Character::PrintInfo()
 {
 	// Header
-	cout << "Имя персонажа: " << name << "\t\t Класс: " << characterClass << " Предыстория: " << background << " Имя игрока:" << playerName << endl;
-	cout << "\t\t" << "Раса: " << race << " Мировоззрение: " << worldview << " Опыт: " << experience << " Уровень: " << level << endl << endl;
+	cout << "Имя персонажа: " << name << "\t\t Класс: " << characterClass << "   Предыстория: " << background << "   Имя игрока:" << playerName << endl;
+	cout << "\t\t" << "Раса: " << race << "   Мировоззрение: " << worldview << "   Опыт: " << experience << "   Уровень: " << level << endl << endl;
 
 	// Left part of character's list
 
@@ -226,7 +235,7 @@ void Character::SetRace()
 		int raceChoise;
 		do
 		{
-			cout << "Выберите наследие драконов:\n1) Белый\t2) Бронзовый\t3) Зелёный\t4) Золотой\n5) Красный\t6)Латунный\t7) Медный\t8) Серебрянный\n9) Синий\t10) Чёрный" << endl;
+			cout << "Выберите наследие драконов:\n1) Белый\t2) Бронзовый\t3) Зелёный\t4) Золотой\n5) Красный\t6) Латунный\t7) Медный\t8) Серебрянный\n9) Синий\t10) Чёрный" << endl;
 			cin >> raceChoise;
 
 			switch (raceChoise)
@@ -580,6 +589,7 @@ void Character::SetRace()
 				otherProficienciesAndLanguages["Оружие"] = { "Длинный меч", "Короткий меч", "Длинный лук", "Короткий лук" };
 				speed = 35;
 				skills.push_back("Маскировка в дикой местности");
+				break;
 			case 3:
 				characteristics.charisma += 1;
 				otherProficienciesAndLanguages["Тёмное зрение"] = { "120 футов" };
@@ -605,6 +615,76 @@ void Character::SetBackground()
 	int userInput;
 	do
 	{
+		cin >> userInput;
+		if (!(1 <= userInput <= BackgroundsVector.size()))
+		{
+			cout << "Неверный ввод. Попробуйте ещё раз" << endl;
+			continue;
+		}
+		
+		background = BackgroundsVector[userInput - 1];
+
+		switch (userInput)
+		{
+		// Артист
+		case 1:
+			masterySkills.push_back("Акробатика");
+			masterySkills.push_back("Выступление");
+			otherProficienciesAndLanguages["Инструменты"] = { "Набор для грима", "Музыкальный инструмент на выбор" };
+			inventory.push_back("Музыкальный инструмент на выбор");
+			inventory.push_back("Подарок от поклонницы");
+			inventory.push_back("Костюм");
+			cash.gold += 15;
+			skills.push_back("По многочисленным просьбам");
+			break;
+		// Беспризорник
+		case 2:
+			masterySkills.push_back("Ловкость рук");
+			masterySkills.push_back("Скрытность");
+			otherProficienciesAndLanguages["Инструменты"] = { "Воровские инструменты", "Набор для грима" };
+			inventory.push_back("Маленький нож");
+			inventory.push_back("Карта города, в котором вы выросли");
+			inventory.push_back("Ручная мышь");
+			inventory.push_back("Безделушка в память о родителях");
+			inventory.push_back("комплект обычной одежды");
+			cash.gold += 10;
+			skills.push_back("Городские тайны");
+			break;
+		// Благородный
+		case 3:
+			masterySkills.push_back("История");
+			masterySkills.push_back("Убеждение");
+			otherProficienciesAndLanguages["Инструменты"] = { "Игровой набор на ваш выбор" };
+			otherProficienciesAndLanguages["Языки"] = { "Любой на ваш выбор" };
+			inventory.push_back("Комплект отличной одежды");
+			inventory.push_back("Кольцо-печатка");
+			inventory.push_back("Свиток с генеалогическим древом");
+			cash.gold += 25;
+
+			// Разновидности благородного
+			int nestedUserInput;
+			do
+			{
+				cout << "Выберите 1 из 2-х:\n1) Благородный\t2) Рыцарь" << endl;
+				cin >> nestedUserInput;
+				switch (nestedUserInput)
+				{
+				case 1:
+					skills.push_back("Привилегированность");
+					break;
+				case 2:
+					skills.push_back("Слуги");
+					break;
+				default:
+					cout << "Неверный ввод. Попробуйте ещё раз" << endl;
+				}
+			} while (!(nestedUserInput == 1 || nestedUserInput == 2));
+		// Гильдейский ремесленник
+		case 4:
+
+		}
+		
+		
 
 	} while (!(1 <= userInput <= BackgroundsVector.size()));
 }
