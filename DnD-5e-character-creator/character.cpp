@@ -80,7 +80,7 @@ void Character::PrintInfo()
 
 void Character::SetName()
 {
-	cout << "Введите имя вашему персонажу (Нажмите 'Enter', что бы пропустить): ";
+	cout << "Введите имя вашему персонажу: ";
 	getline(cin, name);
 	cout << endl;
 }
@@ -341,7 +341,7 @@ void Character::SetRace()
 		int userCharacteristicChoise;
 		for (int i = 0; i < 2; i++)
 		{
-			cout << "Выбирете " << i << " характеристики, значение которых повысится на 1: " << endl;
+			cout << "Выбирете " << i + 1 << "-ю характеристику, значение которых повысится на 1: " << endl;
 			for (int j = 1; j <= characteristicsForHalfelf.size(); j++)
 			{
 				cout << j << ". " << characteristicsForHalfelf[j - 1] << endl;
@@ -680,11 +680,82 @@ void Character::SetBackground()
 				}
 			} while (!(nestedUserInput == 1 || nestedUserInput == 2));
 		// Гильдейский ремесленник
-		case 4:
+		//case 4:
 
 		}
 		
 		
 
 	} while (!(1 <= userInput <= BackgroundsVector.size()));
+}
+
+// Сделал Лев
+void Character::SetWorldview()
+{
+	int userInput;
+	cout << "Выберите 1 из 9-и:\n1) Законо-Добрый\t2) Нейтрально-Добрый\t3) Хаотично-Добрый\n4) Законо-Нейтральный\t5) Нейтральный\t6) Хаотично-Нейтральный\n7) Законо-Злой\t8) Нейтрально-Злой\t9) Хаотично-Злой" << endl;
+	do
+	{
+		cin >> userInput;
+		switch (userInput)
+		{
+		case 1:
+			worldview = "Законо-Добрый";
+			break;
+		case 2:
+			worldview = "Нейтрально-Добрый";
+			break;
+		case 3:
+			worldview = "Хаотично-Добрый";
+			break;
+		case 4:
+			worldview = "Законо-Нейтральный";
+			break;
+		case 5:
+			worldview = "Нейтральный";
+			break;
+		case 6:
+			worldview = "Хаотично-Нейтральный";
+			break;
+		case 7:
+			worldview = "Законо-Злой";
+			break;
+		case 8:
+			worldview = "Нейтрально-Злой";
+			break;
+		case 9:
+			worldview = "Хаотично-Злой";
+			break;
+		default:
+			cout << "Неверный ввод. Попробуйте ещё раз" << endl;
+		}
+	} while (!(1 <= userInput <= 9));
+}
+
+// Сделал Лев
+void Character::SetPlayerName()
+{
+	cout << "Введите ваше имя: ";
+	getline(cin, playerName);
+	cout << endl;
+}
+
+// Сделал Лев
+void Character::SetExperience()
+{
+	// Так как программа ещё не подразумевает левелапы и т.п. вот так вот
+	experience = 0;
+}
+
+// Сделал Лев
+void Character::SetLevel(int _level)
+{
+	level = _level;
+
+	// Расчёт бонуса мастерства
+	if (1 <= level <= 4) masteryBonus = 2;
+	else if (5 <= level <= 8) masteryBonus = 3;
+	else if (9 <= level <= 12) masteryBonus = 4;
+	else if (13 <= level <= 16) masteryBonus = 5;
+	else if (17 <= level <= 20) masteryBonus = 6;
 }

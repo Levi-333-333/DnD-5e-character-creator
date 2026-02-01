@@ -79,5 +79,5 @@ struct Character
 	void SetWorldview();
 	void SetPlayerName();
 	void SetExperience();
-	void SetLevel();
+	void SetLevel(int _level);
 };
