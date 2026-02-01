@@ -19,6 +19,13 @@ struct Characteristic
 	int wisdom;
 	int charisma;
 
+	int strengthMod;
+	int dexterityMod;
+	int constitutionMod;
+	int intelligenceMod;
+	int wisdomMod;
+	int charismaMod;
+
 	Characteristic();
 };
 
@@ -86,6 +93,7 @@ struct Character
 	// Functions for left part of character's list
 	void SetCharacteristics();
 	void SetPassivePerception(); // Ф-я выполняется перед вызовом ф-ии PrintInfo()
+	void SetModifficators(); // Ф-я выполняется перед вызовом ф-ии PrintInfo() приоритетнее всех других подобных функций
 
 	// Functions for Center part of character's list
 	void SetClassArmor(); // Ф-я выполняется перед вызовом ф-ии PrintInfo()

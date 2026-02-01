@@ -977,3 +977,26 @@ void Character::SetCharacteristics()
 		}
 	} while (!(1 <= userInput <= 2));
 }
+
+// Сделал Лев
+void Character::SetModifficators()
+{
+	characteristics.strengthMod = (characteristics.strength - 10) / 2;
+	characteristics.dexterityMod = (characteristics.dexterity - 10) / 2;
+	characteristics.constitutionMod = (characteristics.constitution - 10) / 2;
+	characteristics.intelligenceMod = (characteristics.intelligence - 10) / 2;
+	characteristics.wisdomMod = (characteristics.wisdom - 10) / 2;
+	characteristics.charismaMod = (characteristics.charisma - 10) / 2;
+}
+
+// Сделала Рия
+void Character::SetPassivePerception()
+{
+	bool havePerception = false;
+	for (int i = 0; i < inventory.size(); i++)
+	{
+		if (inventory[i] == "Восприятие") havePerception = true;
+	}
+	if (havePerception) passivePerception = 10 + characteristics.wisdom + masteryBonus;
+	else passivePerception = 10 + characteristics.wisdom;
+}
