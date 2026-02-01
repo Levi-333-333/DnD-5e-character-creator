@@ -48,6 +48,16 @@ vector<string> BackgroundsVector =
 	"Шарлатан"
 };
 
+vector<string> CharacteristicsVector = 
+{ 
+	"Сила", 
+	"Ловкость", 
+	"Телосложение", 
+	"Интелект", 
+	"Мудрость", 
+	"Харизма" 
+};
+
 Characteristic::Characteristic()
 {
 	strength = 0;
@@ -445,7 +455,7 @@ void Character::SetRace()
 	{
 		cout << "Выберите 1 из 2-х:\n1) Человек обычный\t2) Человек альтернативный" << endl;
 		int humanChoise;
-		vector<string> characteristicsForHuman = { "Сила", "Ловкость", "Телосложение", "Интелект", "Мудрость", "Харизма" };
+		vector<string> CharacteristicsVector = { "Сила", "Ловкость", "Телосложение", "Интелект", "Мудрость", "Харизма" };
 		vector<string> skillsToChose = { "Акробатика", "Анализ", "Атлетика", "Восприятие", "Выживание", "Выступление", "Запугивание", "История", "Ловкость рук", "Магия", "Медицина", "Обман", "Природа", "Проницательность", "Религия", "Скрытность", "Убеждение", "Уход за животными" };
 		do
 		{
@@ -471,50 +481,50 @@ void Character::SetRace()
 				for (int i = 0; i < 2; i++)
 				{
 					cout << "Выбирете " << i + 1 << "-ю характеристику, значение которых повысится на 1: " << endl;
-					for (int j = 1; j <= characteristicsForHuman.size(); j++)
+					for (int j = 1; j <= CharacteristicsVector.size(); j++)
 					{
-						cout << j << ". " << characteristicsForHuman[j - 1] << endl;
+						cout << j << ". " << CharacteristicsVector[j - 1] << endl;
 					}
 					cin >> userCharacteristicChoise;
 
-					if (userCharacteristicChoise > characteristicsForHuman.size())
+					if (userCharacteristicChoise > CharacteristicsVector.size())
 					{
 						cout << "Неверный ввод. Попробуйте ещё раз" << endl;
 						i--;
 						continue;
 					}
 
-					string chosenCharacteriscic = characteristicsForHuman[userCharacteristicChoise - 1];
+					string chosenCharacteriscic = CharacteristicsVector[userCharacteristicChoise - 1];
 
 					if (chosenCharacteriscic == "Сила")
 					{
 						characteristics.strength += 1;
-						characteristicsForHuman.erase(characteristicsForHuman.begin() + (userCharacteristicChoise - 1));
+						CharacteristicsVector.erase(CharacteristicsVector.begin() + (userCharacteristicChoise - 1));
 					}
 					else if (chosenCharacteriscic == "Ловкость")
 					{
 						characteristics.dexterity += 1;
-						characteristicsForHuman.erase(characteristicsForHuman.begin() + (userCharacteristicChoise - 1));
+						CharacteristicsVector.erase(CharacteristicsVector.begin() + (userCharacteristicChoise - 1));
 					}
 					else if (chosenCharacteriscic == "Телосложение")
 					{
 						characteristics.constitution += 1;
-						characteristicsForHuman.erase(characteristicsForHuman.begin() + (userCharacteristicChoise - 1));
+						CharacteristicsVector.erase(CharacteristicsVector.begin() + (userCharacteristicChoise - 1));
 					}
 					else if (chosenCharacteriscic == "Интелект")
 					{
 						characteristics.intelligence += 1;
-						characteristicsForHuman.erase(characteristicsForHuman.begin() + (userCharacteristicChoise - 1));
+						CharacteristicsVector.erase(CharacteristicsVector.begin() + (userCharacteristicChoise - 1));
 					}
 					else if (chosenCharacteriscic == "Мудрость")
 					{
 						characteristics.wisdom += 1;
-						characteristicsForHuman.erase(characteristicsForHuman.begin() + (userCharacteristicChoise - 1));
+						CharacteristicsVector.erase(CharacteristicsVector.begin() + (userCharacteristicChoise - 1));
 					}
 					else if (chosenCharacteriscic == "Харизма")
 					{
 						characteristics.charisma += 1;
-						characteristicsForHuman.erase(characteristicsForHuman.begin() + (userCharacteristicChoise - 1));
+						CharacteristicsVector.erase(CharacteristicsVector.begin() + (userCharacteristicChoise - 1));
 					}
 				}
 
@@ -758,4 +768,104 @@ void Character::SetLevel(int _level)
 	else if (9 <= level <= 12) masteryBonus = 4;
 	else if (13 <= level <= 16) masteryBonus = 5;
 	else if (17 <= level <= 20) masteryBonus = 6;
+}
+
+void Character::SetCharacteristics()
+{
+	int userInput;
+	vector<int> standartChars = { 15, 14, 13, 12, 10, 8 };
+	vector<int> fourD6;
+	vector<int> randomChars;
+	cout << "Выберите 1 из 2-х:\n1) Распределить стандартные значения\t2) Распределить случайные характеристики" << endl;
+	do
+	{
+		cin >> userInput;
+		switch (userInput)
+		{
+		// Стандартные хар-ки
+		case 1:
+			do
+			{
+				cout << "Характеристики: " << endl;
+				for (int i = 1; i <= CharacteristicsVector.size(); i++)
+				{
+					cout << i << ". " << CharacteristicsVector[i - 1] << endl;
+				}
+				cout << endl << "Доступные значения: " << endl;
+				for (int i = 1; i <= standartChars.size(); i++)
+				{
+					cout << i << ". " << standartChars[i - 1] << endl;
+				}
+
+				int chosenCharacteristics;
+				cin >> chosenCharacteristics;
+
+				if (chosenCharacteristics > CharacteristicsVector.size())
+				{
+					cout << "Неверный ввод. Попробуйте ещё раз" << endl;
+					continue;
+				}
+
+				string chosenCharacteristicsString = CharacteristicsVector[chosenCharacteristics - 1];
+
+				cout << "Выбранная характеристика: " << chosenCharacteristicsString << ". Выберите для неё значение: " << endl;
+				for (int i = 1; i <= standartChars.size(); i++)
+				{
+					cout << i << ". " << standartChars[i - 1] << endl;
+				}
+
+				int chosenValueI;
+				cin >> chosenValueI;
+
+				if (chosenValueI > standartChars.size())
+				{
+					cout << "Неверный ввод. Попробуйте ещё раз" << endl;
+					continue;
+				}
+
+				int chosenValue = standartChars[chosenValueI - 1];
+
+				if (chosenCharacteristicsString == "Сила")
+				{
+					characteristics.strength += chosenValue;
+					CharacteristicsVector.erase(CharacteristicsVector.begin() + (chosenCharacteristics - 1));
+					standartChars.erase(standartChars.begin() + (chosenValueI - 1));
+				}
+				else if (chosenCharacteristicsString == "Ловкость")
+				{
+					characteristics.dexterity += chosenValue;
+					CharacteristicsVector.erase(CharacteristicsVector.begin() + (chosenCharacteristics - 1));
+					standartChars.erase(standartChars.begin() + (chosenValueI - 1));
+				}
+				else if (chosenCharacteristicsString == "Телосложение")
+				{
+					characteristics.constitution += chosenValue;
+					CharacteristicsVector.erase(CharacteristicsVector.begin() + (chosenCharacteristics - 1));
+					standartChars.erase(standartChars.begin() + (chosenValueI - 1));
+				}
+				else if (chosenCharacteristicsString == "Интелект")
+				{
+					characteristics.intelligence += chosenValue;
+					CharacteristicsVector.erase(CharacteristicsVector.begin() + (chosenCharacteristics - 1));
+					standartChars.erase(standartChars.begin() + (chosenValueI - 1));
+				}
+				else if (chosenCharacteristicsString == "Мудрость")
+				{
+					characteristics.wisdom += chosenValue;
+					CharacteristicsVector.erase(CharacteristicsVector.begin() + (chosenCharacteristics - 1));
+					standartChars.erase(standartChars.begin() + (chosenValueI - 1));
+				}
+				else if (chosenCharacteristicsString == "Харизма")
+				{
+					characteristics.charisma += chosenValue;
+					CharacteristicsVector.erase(CharacteristicsVector.begin() + (chosenCharacteristics - 1));
+					standartChars.erase(standartChars.begin() + (chosenValueI - 1));
+				}
+				
+			} while (standartChars.size() != 0);
+
+		default:
+			break;
+		}
+	} while (!(1 <= userInput <= 2));
 }

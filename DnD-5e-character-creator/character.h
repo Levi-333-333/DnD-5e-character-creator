@@ -71,6 +71,7 @@ struct Character
 
 	// Functions
 	void PrintInfo();
+
 	// Functions for header
 	void SetName();
 	void SetCharacterClass();
@@ -78,6 +79,20 @@ struct Character
 	void SetBackground();
 	void SetWorldview();
 	void SetPlayerName();
-	void SetExperience();
-	void SetLevel(int _level);
+	void SetExperience(); // Пока программа не подразумевает лвлапы и/или создание персонажа уровня выше первого ф-я выполняется перед вызовом ф-ии PrintInfo() 
+	void SetLevel(int _level); // Пока программа не подразумевает лвлапы и/или создание персонажа уровня выше первого ф-я выполняется перед вызовом ф-ии PrintInfo() со значением 1
+
+	// Functions for left part of character's list
+	void SetCharacteristics();
+	void SetPassivePerception(); // Ф-я выполняется перед вызовом ф-ии PrintInfo()
+
+	// Functions for Center part of character's list
+	void SetClassArmor(); // Ф-я выполняется перед вызовом ф-ии PrintInfo()
+	void SetInitiative(); // Ф-я выполняется перед вызовом ф-ии PrintInfo()
+
+	// Functions for right part of character's list
+	void SetCharacterTraits();
+	void SetIdeals();
+	void SetAffections();
+	void SetWeaknesses();
 };

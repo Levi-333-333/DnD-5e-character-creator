@@ -10,5 +10,7 @@ void main()
 
 	Character character;
 
+	character.SetCharacteristics();
+
 	character.PrintInfo();
 }
