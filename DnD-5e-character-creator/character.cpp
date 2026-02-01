@@ -107,6 +107,7 @@ void Character::SetCharacterClass()
 	}
 }
 
+// Сделал Лев
 void Character::SetRace()
 {
 	cout << "Введите одну из предложенных рас (цифрой)" << endl;
@@ -275,4 +276,335 @@ void Character::SetRace()
 			}
 		} while (!(1 <= raceChoise <= 10));
 	}
+
+	// Полуорк
+	else if (userInput == 4)
+	{
+		characteristics.strength += 2;
+		characteristics.constitution += 1;
+		speed = 30;
+		otherProficienciesAndLanguages["Тёмное зрение"] = { "60 футов" };
+		masterySkills.push_back("Запугивание");
+		skills.push_back("Непоколебимая стойкость");
+		skills.push_back("Свирепые атаки");
+		otherProficienciesAndLanguages["Языки"] = { "Общий", "Орочий" };
+	}
+
+	// Полурослик
+	else if (userInput == 5)
+	{
+		characteristics.dexterity += 2;
+		speed = 25;
+		skills.push_back("Везучий");
+		skills.push_back("Храбрый");
+		skills.push_back("Проворство полуросликов");
+		otherProficienciesAndLanguages["Языки"] = { "Общий", "Язык Полуросликов" };
+
+		// Подрасы
+		int raceChoise;
+		do
+		{
+			cout << "Выберите 1 из 2-х: \n1) Коренастый полурослик\t2) Легконогий полурослик" << endl;
+			cin >> raceChoise;
+			switch (raceChoise)
+			{
+			case 1:
+				characteristics.constitution += 1;
+				skills.push_back("Устойчивость коренастых");
+				break;
+			case 2:
+				characteristics.charisma += 1;
+				skills.push_back("Естественная скрытность");
+				break;
+			default:
+				cout << "Неверный ввод. Попробуйте ещё раз" << endl;
+			}
+		} while (!(raceChoise == 1 || raceChoise == 2));
+	}
+
+	// Полуэльф
+	else if (userInput == 6)
+	{
+		// Выбор характеристик
+		vector<string> characteristicsForHalfelf = { "Сила", "Ловкость", "Телосложение", "Интелект", "Мудрость" };
+		characteristics.charisma += 2;
+		
+		int userCharacteristicChoise;
+		for (int i = 0; i < 2; i++)
+		{
+			cout << "Выбирете " << i << " характеристики, значение которых повысится на 1: " << endl;
+			for (int j = 1; j <= characteristicsForHalfelf.size(); j++)
+			{
+				cout << j << ". " << characteristicsForHalfelf[j - 1] << endl;
+			}
+			cin >> userCharacteristicChoise;
+
+			if (userCharacteristicChoise > characteristicsForHalfelf.size())
+			{
+				cout << "Неверный ввод. Попробуйте ещё раз" << endl;
+				i--;
+				continue;
+			}
+
+			string chosenCharacteriscic = characteristicsForHalfelf[userCharacteristicChoise - 1];
+
+			if (chosenCharacteriscic == "Сила")
+			{
+				characteristics.strength += 1;
+				characteristicsForHalfelf.erase(characteristicsForHalfelf.begin() + (userCharacteristicChoise - 1));
+			}
+			else if (chosenCharacteriscic == "Ловкость") 
+			{
+				characteristics.dexterity += 1;
+				characteristicsForHalfelf.erase(characteristicsForHalfelf.begin() + (userCharacteristicChoise - 1));
+			}
+			else if (chosenCharacteriscic == "Телосложение") 
+			{
+				characteristics.constitution += 1;
+				characteristicsForHalfelf.erase(characteristicsForHalfelf.begin() + (userCharacteristicChoise - 1));
+			}
+			else if (chosenCharacteriscic == "Интелект") 
+			{
+				characteristics.intelligence += 1;
+				characteristicsForHalfelf.erase(characteristicsForHalfelf.begin() + (userCharacteristicChoise - 1));
+			}
+			else if (chosenCharacteriscic == "Мудрость")
+			{
+				characteristics.wisdom += 1;
+				characteristicsForHalfelf.erase(characteristicsForHalfelf.begin() + (userCharacteristicChoise - 1));
+			}
+			
+		}
+
+		//Выбор навыков
+		vector<string> skillsToChose = { "Акробатика", "Анализ", "Атлетика", "Восприятие", "Выживание", "Выступление", "Запугивание", "История", "Ловкость рук", "Магия", "Медицина", "Обман", "Природа", "Проницательность", "Религия", "Скрытность", "Убеждение", "Уход за животными" };
+		//Убираем из списка выше все навыки, которые уже есть у персонажа
+		for (int i = 0; i < masterySkills.size(); i++)
+		{
+			for (int j = 0; j < skillsToChose.size(); j++) 
+			{
+				if (masterySkills[i] == skillsToChose[j])
+				{
+					skillsToChose.erase(skillsToChose.begin() + j);
+					break;
+				}
+			}
+		}
+		// Выбор из оставшихся навыков
+		for (int i = 0; i < 2; i++)
+		{
+			cout << "Выберите " << i + 1 << "-й навык (из 2-х) для изучения: " << endl;
+			for (int j = 1; j <= skillsToChose.size(); j++)
+			{
+				cout << j << ". " << skillsToChose[j - 1] << endl;
+			}
+			int chosenSkill;
+			cin >> chosenSkill;
+			if (chosenSkill <= skillsToChose.size())
+			{
+				skills.push_back(skillsToChose[chosenSkill - 1]);
+				skillsToChose.erase(skillsToChose.begin() + (chosenSkill - 1));
+			}
+			else
+			{
+				cout << "Неверный ввод. Попробуйте ещё раз" << endl;
+				i--;
+			}
+		}
+
+		// Всё остальное
+		speed = 30;
+		otherProficienciesAndLanguages["Тёмное зрение"] = { "60 футов" };
+		skills.push_back("Наследие фей");
+		otherProficienciesAndLanguages["Языки"] = { "Общий", "Эльфийский", "Любой на выбор" };
+	}
+
+	// Тифлинг
+	else if (userInput == 7)
+	{
+		characteristics.intelligence += 1;
+		characteristics.charisma += 2;
+		speed = 30;
+		otherProficienciesAndLanguages["Тёмное зрение"] = { "60 футов" };
+		skills.push_back("Адское сопротивление");
+		skills.push_back("Дьявольское наследие");
+		otherProficienciesAndLanguages["Языки"] = { "Общий", "Инфернальный" };
+	}
+
+	// Человек
+	else if (userInput == 8)
+	{
+		cout << "Выберите 1 из 2-х:\n1) Человек обычный\t2) Человек альтернативный" << endl;
+		int humanChoise;
+		vector<string> characteristicsForHuman = { "Сила", "Ловкость", "Телосложение", "Интелект", "Мудрость", "Харизма" };
+		vector<string> skillsToChose = { "Акробатика", "Анализ", "Атлетика", "Восприятие", "Выживание", "Выступление", "Запугивание", "История", "Ловкость рук", "Магия", "Медицина", "Обман", "Природа", "Проницательность", "Религия", "Скрытность", "Убеждение", "Уход за животными" };
+		do
+		{
+			cin >> humanChoise;
+			switch (humanChoise)
+			{
+			// Человек обычный
+			case 1:
+				characteristics.strength += 1;
+				characteristics.dexterity += 1;
+				characteristics.constitution += 1;
+				characteristics.intelligence += 1;
+				characteristics.wisdom += 1;
+				characteristics.charisma += 1;
+				speed = 30;
+				otherProficienciesAndLanguages["Языки"] = { "Общий", "Любой на выбор" };
+				break;
+			// Человек альтернативный
+			case 2:
+				// Хахахахахарактеристика (я схожу с ума)
+				int userCharacteristicChoise;
+
+				for (int i = 0; i < 2; i++)
+				{
+					cout << "Выбирете " << i + 1 << "-ю характеристику, значение которых повысится на 1: " << endl;
+					for (int j = 1; j <= characteristicsForHuman.size(); j++)
+					{
+						cout << j << ". " << characteristicsForHuman[j - 1] << endl;
+					}
+					cin >> userCharacteristicChoise;
+
+					if (userCharacteristicChoise > characteristicsForHuman.size())
+					{
+						cout << "Неверный ввод. Попробуйте ещё раз" << endl;
+						i--;
+						continue;
+					}
+
+					string chosenCharacteriscic = characteristicsForHuman[userCharacteristicChoise - 1];
+
+					if (chosenCharacteriscic == "Сила")
+					{
+						characteristics.strength += 1;
+						characteristicsForHuman.erase(characteristicsForHuman.begin() + (userCharacteristicChoise - 1));
+					}
+					else if (chosenCharacteriscic == "Ловкость")
+					{
+						characteristics.dexterity += 1;
+						characteristicsForHuman.erase(characteristicsForHuman.begin() + (userCharacteristicChoise - 1));
+					}
+					else if (chosenCharacteriscic == "Телосложение")
+					{
+						characteristics.constitution += 1;
+						characteristicsForHuman.erase(characteristicsForHuman.begin() + (userCharacteristicChoise - 1));
+					}
+					else if (chosenCharacteriscic == "Интелект")
+					{
+						characteristics.intelligence += 1;
+						characteristicsForHuman.erase(characteristicsForHuman.begin() + (userCharacteristicChoise - 1));
+					}
+					else if (chosenCharacteriscic == "Мудрость")
+					{
+						characteristics.wisdom += 1;
+						characteristicsForHuman.erase(characteristicsForHuman.begin() + (userCharacteristicChoise - 1));
+					}
+					else if (chosenCharacteriscic == "Харизма")
+					{
+						characteristics.charisma += 1;
+						characteristicsForHuman.erase(characteristicsForHuman.begin() + (userCharacteristicChoise - 1));
+					}
+				}
+
+				//Убираем из списка выше все навыки, которые уже есть у персонажа
+				for (int i = 0; i < masterySkills.size(); i++)
+				{
+					for (int j = 0; j < skillsToChose.size(); j++)
+					{
+						if (masterySkills[i] == skillsToChose[j])
+						{
+							skillsToChose.erase(skillsToChose.begin() + j);
+							break;
+						}
+					}
+				}
+
+				cout << "Выберите 1 навык для изучения: " << endl;
+				for (int j = 1; j <= skillsToChose.size(); j++)
+				{
+					cout << j << ". " << skillsToChose[j - 1] << endl;
+				}
+				int chosenSkill;
+				do
+				{
+					cin >> chosenSkill;
+					if (chosenSkill <= skillsToChose.size())
+					{
+						skills.push_back(skillsToChose[chosenSkill - 1]);
+						skillsToChose.erase(skillsToChose.begin() + (chosenSkill - 1));
+					}
+					else
+					{
+						cout << "Неверный ввод. Попробуйте ещё раз" << endl;
+					}
+				} while (!(1 <= chosenSkill <= skillsToChose.size()));
+				
+				break;
+			default:
+				cout << "Неверный ввод. Попробуйте ещё раз" << endl;
+			}
+		} while (!(1 <= humanChoise <= 2));
+	}
+
+	// Эльф
+	else if (userInput == 9)
+	{
+		characteristics.dexterity += 2;
+		speed = 30;
+		masterySkills.push_back("Восприятие");
+		skills.push_back("Наследие фей");
+		skills.push_back("Транс");
+		otherProficienciesAndLanguages["Языки"] = { "Общий", "Эльфийский" };
+
+		// Подраса
+		int raceChoise;
+		do
+		{
+			cout << "Выберите 1 из 3-х: \n1) Высший эльф\t2) Лесной эльф\t3) Тёмный эльф (Дроу)" << endl;
+			cin >> raceChoise;
+			switch (raceChoise)
+			{
+			case 1:
+				otherProficienciesAndLanguages["Тёмное зрение"] = { "60 футов" };
+				characteristics.intelligence += 1;
+				otherProficienciesAndLanguages["Оружие"] = { "Длинный меч", "Короткий меч", "Длинный лук", "Короткий лук" };
+				skills.push_back("Заговор");
+				otherProficienciesAndLanguages["Языки"] = { "Любой на выбор" };
+				break;
+			case 2:
+				otherProficienciesAndLanguages["Тёмное зрение"] = { "60 футов" };
+				characteristics.wisdom += 1;
+				otherProficienciesAndLanguages["Оружие"] = { "Длинный меч", "Короткий меч", "Длинный лук", "Короткий лук" };
+				speed = 35;
+				skills.push_back("Маскировка в дикой местности");
+			case 3:
+				characteristics.charisma += 1;
+				otherProficienciesAndLanguages["Тёмное зрение"] = { "120 футов" };
+				skills.push_back("Чувствительность к солнцу");
+				skills.push_back("Магия дроу");
+				otherProficienciesAndLanguages["Оружие"] = { "Рапира", "Короткий меч", "Ручной арбалет" };
+				break;
+			default:
+				cout << "Неверный ввод. Попробуйте ещё раз" << endl;
+			}
+		} while (!(raceChoise == 1 || raceChoise == 2 || raceChoise == 3));
+	}
+}
+
+void Character::SetBackground()
+{
+	cout << "Выберите предысторию (цифрой): " << endl;
+	for (int i = 1; i <= BackgroundsVector.size(); i++)
+	{
+		cout << i << ". " << BackgroundsVector[i - 1] << endl;
+	}
+
+	int userInput;
+	do
+	{
+
+	} while (!(1 <= userInput <= BackgroundsVector.size()));
 }
