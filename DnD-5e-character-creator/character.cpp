@@ -799,6 +799,7 @@ void Character::SetCharacteristics()
 				}
 
 				int chosenCharacteristics;
+				cout << "Выберите характеристику: ";
 				cin >> chosenCharacteristics;
 
 				if (chosenCharacteristics > CharacteristicsVector.size())
@@ -866,34 +867,33 @@ void Character::SetCharacteristics()
 			} while (standartChars.size() != 0);
 			break;
 		case 2:
-			do
+			for (int i = 0; i < 6; i++)
 			{
-				for (int i = 0; i < 6; i++)
+				fourD6.push_back(D6);
+				fourD6.push_back(D6);
+				fourD6.push_back(D6);
+				fourD6.push_back(D6);
+
+				int minInFourD6 = fourD6[0];
+				for (int j = 1; j < fourD6.size(); j++)
 				{
-					fourD6.push_back(D6);
-					fourD6.push_back(D6);
-					fourD6.push_back(D6);
-					fourD6.push_back(D6);
-
-					int minInFourD6 = fourD6[0];
-					for (int j = 1; j < fourD6.size(); j++)
-					{
-						if (minInFourD6 > fourD6[j]) minInFourD6 = fourD6[j];
-					}
-
-					int sumAllD6 = 0;
-					for (int j = 0; j < fourD6.size(); j++)
-					{
-						sumAllD6 += fourD6[j];
-					}
-					sumAllD6 -= minInFourD6;
-
-					randomChars.push_back(sumAllD6);
-
-					sumAllD6 = 0;
-					fourD6.clear();
+					if (minInFourD6 > fourD6[j]) minInFourD6 = fourD6[j];
 				}
 
+				int sumAllD6 = 0;
+				for (int j = 0; j < fourD6.size(); j++)
+				{
+					sumAllD6 += fourD6[j];
+				}
+				sumAllD6 -= minInFourD6;
+
+				randomChars.push_back(sumAllD6);
+
+				sumAllD6 = 0;
+				fourD6.clear();
+			}
+			do
+			{
 				cout << "Характеристики: " << endl;
 				for (int i = 1; i <= CharacteristicsVector.size(); i++)
 				{
@@ -905,8 +905,10 @@ void Character::SetCharacteristics()
 					cout << i << ". " << randomChars[i - 1] << endl;
 				}
 
+				cout << "Выберите характеристику: ";
 				int chosenCharacteristics;
 				cin >> chosenCharacteristics;
+				cout << endl;
 
 				if (chosenCharacteristics > CharacteristicsVector.size())
 				{
@@ -937,37 +939,37 @@ void Character::SetCharacteristics()
 				{
 					characteristics.strength += chosenValue;
 					CharacteristicsVector.erase(CharacteristicsVector.begin() + (chosenCharacteristics - 1));
-					standartChars.erase(standartChars.begin() + (chosenValueI - 1));
+					randomChars.erase(randomChars.begin() + (chosenValueI - 1));
 				}
 				else if (chosenCharacteristicsString == "Ловкость")
 				{
 					characteristics.dexterity += chosenValue;
 					CharacteristicsVector.erase(CharacteristicsVector.begin() + (chosenCharacteristics - 1));
-					standartChars.erase(standartChars.begin() + (chosenValueI - 1));
+					randomChars.erase(randomChars.begin() + (chosenValueI - 1));
 				}
 				else if (chosenCharacteristicsString == "Телосложение")
 				{
 					characteristics.constitution += chosenValue;
 					CharacteristicsVector.erase(CharacteristicsVector.begin() + (chosenCharacteristics - 1));
-					standartChars.erase(standartChars.begin() + (chosenValueI - 1));
+					randomChars.erase(randomChars.begin() + (chosenValueI - 1));
 				}
 				else if (chosenCharacteristicsString == "Интелект")
 				{
 					characteristics.intelligence += chosenValue;
 					CharacteristicsVector.erase(CharacteristicsVector.begin() + (chosenCharacteristics - 1));
-					standartChars.erase(standartChars.begin() + (chosenValueI - 1));
+					randomChars.erase(randomChars.begin() + (chosenValueI - 1));
 				}
 				else if (chosenCharacteristicsString == "Мудрость")
 				{
 					characteristics.wisdom += chosenValue;
 					CharacteristicsVector.erase(CharacteristicsVector.begin() + (chosenCharacteristics - 1));
-					standartChars.erase(standartChars.begin() + (chosenValueI - 1));
+					randomChars.erase(randomChars.begin() + (chosenValueI - 1));
 				}
 				else if (chosenCharacteristicsString == "Харизма")
 				{
 					characteristics.charisma += chosenValue;
 					CharacteristicsVector.erase(CharacteristicsVector.begin() + (chosenCharacteristics - 1));
-					standartChars.erase(standartChars.begin() + (chosenValueI - 1));
+					randomChars.erase(randomChars.begin() + (chosenValueI - 1));
 				}
 
 			} while (CharacteristicsVector.size() != 0);
@@ -1050,4 +1052,22 @@ void Character::SetClassArmor()
 		// Щит
 		if (inventory[i] == "Щит") classArmor += 2;
 	}
+}
+
+// Сделала Рия
+void Character::SetCharacterTraits()
+{
+	getline(cin, characterTraits);
+}
+void Character::SetIdeals()
+{
+	getline(cin, ideals);
+}
+void Character::SetAffections()
+{
+	getline(cin, affections);
+}
+void Character::SetWeaknesses()
+{
+	getline(cin, weaknesses);
 }
