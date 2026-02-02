@@ -100,16 +100,6 @@ Wallet::Wallet()
 }
 
 
-void Character::PrintInfo()
-{
-	// Header
-	cout << "Имя персонажа: " << name << "\t\t Класс: " << characterClass << "   Предыстория: " << background << "   Имя игрока:" << playerName << endl;
-	cout << "\t\t" << "Раса: " << race << "   Мировоззрение: " << worldview << "   Опыт: " << experience << "   Уровень: " << level << endl << endl;
-
-	// Left part of character's list
-
-}
-
 void Character::SetName()
 {
 	cout << "Введите имя вашему персонажу: ";
@@ -173,7 +163,7 @@ void Character::SetCharacterClass()
 			cin >> chosenSkill;
 			if (chosenSkill <= SkillsVector.size())
 			{
-				skills.push_back(SkillsVector[chosenSkill - 1]);
+				masterySkills.push_back(SkillsVector[chosenSkill - 1]);
 				SkillsVector.erase(SkillsVector.begin() + (chosenSkill - 1));
 			}
 			else
@@ -1275,7 +1265,7 @@ void Character::SetPassivePerception()
 // Сделала Рия
 void Character::SetInitiative()
 {
-	initiative += characteristics.dexterityMod;
+	initiative = characteristics.dexterityMod;
 }
 
 // Сделала Рия
@@ -1332,19 +1322,89 @@ void Character::SetCharacterTraits()
 }
 void Character::SetIdeals()
 {
-	cout << "Введите черты характера: " << endl;
+	cout << "Введите идеалы: " << endl;
 	getline(cin, ideals);
 	cout << endl;
 }
 void Character::SetAffections()
 {
-	cout << "Введите черты характера: " << endl;
+	cout << "Введите привязанности: " << endl;
 	getline(cin, affections);
 	cout << endl;
 }
 void Character::SetWeaknesses()
 {
-	cout << "Введите черты характера: " << endl;
+	cout << "Введите слабости: " << endl;
 	getline(cin, weaknesses);
 	cout << endl;
+}
+
+void Character::PrintInfo()
+{
+	cout << "Имя персонажа: " << name << "\t\t Класс: " << characterClass << "   Предыстория: " << background << "   Имя игрока:" << playerName << endl;
+	cout << "\t\t" << "Раса: " << race << "   Мировоззрение: " << worldview << "   Опыт: " << experience << "   Уровень: " << level << endl << endl;
+
+	cout << "Сила\n" << characteristics.strength << endl << "(" << characteristics.strengthMod << ")" << endl;
+	cout << "Ловкость\n" << characteristics.dexterity << endl << "(" << characteristics.dexterityMod << ")" << endl;
+	cout << "Телосложение\n" << characteristics.constitution << endl << "(" << characteristics.constitutionMod << ")" << endl;
+	cout << "Интелект\n" << characteristics.intelligence << endl << "(" << characteristics.intelligenceMod << ")" << endl;
+	cout << "Мудрость\n" << characteristics.wisdom << endl << "(" << characteristics.wisdomMod << ")" << endl;
+	cout << "Харизма\n" << characteristics.charisma << endl << "(" << characteristics.charismaMod << ")" << endl << endl;
+
+	cout << "Бонус мастерства: +" << masteryBonus << endl;
+
+	cout << "Владения спасбросками: ";
+	for (int i = 0; i < savingThrowsSkills.size(); i++)
+	{
+		if (!(i == (savingThrowsSkills.size() - 1))) cout << savingThrowsSkills[i] << ", ";
+		else cout << savingThrowsSkills[i];
+	}
+	cout << endl;
+
+	cout << "Владения навыками: ";
+	for (int i = 0; i < masterySkills.size(); i++)
+	{
+		if (!(i == (masterySkills.size() - 1))) cout << masterySkills[i] << ", ";
+		else cout << masterySkills[i];
+	}
+	cout << endl;
+
+	cout << "Прочие владения и языки:" << endl;
+	for (const auto& pair : otherProficienciesAndLanguages)
+	{
+		cout << pair.first << ": ";
+		for (int i = 0; i < pair.second.size(); i++)
+		{
+			if (i == (pair.second.size() - 1)) cout << pair.second[i];
+			else cout << pair.second[i] << ", ";
+		}
+		cout << endl;
+	}
+	cout << endl << endl;
+
+	cout << "Класс брони: " << classArmor << "  Инициатива: " << initiative << "  Скорость: " << speed << endl;
+
+	cout << "Максимум хитов: " << maxHits << endl;
+
+	cout << "Кость хитов: d" << hitDice << endl << endl;
+
+	cout << "ММ  СМ  ЭМ  ЗМ  ПМ" << endl;
+	cout << cash.copper << "    " << cash.silver << "    " << cash.electrum << "    " << cash.gold << "    " << cash.platinum << endl;
+
+	cout << "Снаряжение: " << endl;
+	for (int i = 0; i < inventory.size(); i++)
+	{
+		if (i == (inventory.size() - 1)) cout << inventory[i];
+		else cout << inventory[i] << ", ";
+	}
+	cout << endl << endl;
+
+	cout << "Черты характера:" << endl << characterTraits << endl << "Идеалы:" << endl << ideals << endl;
+	cout << "Привязанности:" << endl << affections << endl << "Слабости:" << endl << weaknesses << endl << endl;
+
+	cout << "Умения и способности: " << endl;
+	for (int i = 0; i < skills.size(); i++)
+	{
+		cout << skills[i] << endl;
+	}
 }
