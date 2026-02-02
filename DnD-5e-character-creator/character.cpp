@@ -614,6 +614,7 @@ void Character::SetRace()
 	}
 }
 
+// Сделала Рия
 void Character::SetBackground()
 {
 	cout << "Выберите предысторию (цифрой): " << endl;
@@ -623,12 +624,14 @@ void Character::SetBackground()
 	}
 
 	int userInput;
+	bool endCycle = true;
 	do
 	{
 		cin >> userInput;
-		if (!(1 <= userInput <= BackgroundsVector.size()))
+		if (!(userInput >= 1 && userInput <= BackgroundsVector.size()))
 		{
 			cout << "Неверный ввод. Попробуйте ещё раз" << endl;
+			endCycle = false;
 			continue;
 		}
 		
@@ -646,6 +649,7 @@ void Character::SetBackground()
 			inventory.push_back("Костюм");
 			cash.gold += 15;
 			skills.push_back("По многочисленным просьбам");
+			endCycle = true;
 			break;
 		// Беспризорник
 		case 2:
@@ -659,6 +663,7 @@ void Character::SetBackground()
 			inventory.push_back("комплект обычной одежды");
 			cash.gold += 10;
 			skills.push_back("Городские тайны");
+			endCycle = true;
 			break;
 		// Благородный
 		case 3:
@@ -689,14 +694,154 @@ void Character::SetBackground()
 					cout << "Неверный ввод. Попробуйте ещё раз" << endl;
 				}
 			} while (!(nestedUserInput == 1 || nestedUserInput == 2));
+			endCycle = true;
+			break;
 		// Гильдейский ремесленник
-		//case 4:
-
+		case 4:
+			masterySkills.push_back("Проницательность");
+			masterySkills.push_back("Убеждение");
+			otherProficienciesAndLanguages["Инструменты"] = { "Один вид ремесленных инструментов на выбор" };
+			otherProficienciesAndLanguages["Языки"] = { "Один на выбор" };
+			inventory.push_back("Один вид ремесленных инструментов");
+			inventory.push_back("Рекомендательное письмо из гильдии");
+			inventory.push_back("Комплект дорожной одежды");
+			cash.gold += 15;
+			skills.push_back("Членство в гильдии");
+			endCycle = true;
+			break;
+		// Моряк
+		case 5:
+			masterySkills.push_back("Атлетика");
+			masterySkills.push_back("Восприятие");
+			otherProficienciesAndLanguages["Инструменты"] = { "Инструменты навигатора", "Транспорт (водный)" };
+			inventory.push_back("Дубинка");
+			inventory.push_back("50 футов шёлковой верёвки");
+			inventory.push_back("Талисман");
+			inventory.push_back("Комплект обычной обежды");
+			cash.gold += 10;
+			skills.push_back("Поездка на корабле");
+			endCycle = true;
+			break;
+		// Мудрец
+		case 6:
+			masterySkills.push_back("История");
+			masterySkills.push_back("Магия");
+			otherProficienciesAndLanguages["Языки"] = { "Язык на ваш выбор", "Язык на ваш выбор" };
+			inventory.push_back("Бутылочка чернил");
+			inventory.push_back("Писчее перо");
+			inventory.push_back("Небольшой нож");
+			inventory.push_back("Письмо от мёртвого коллеги с вопросом, на который вы пока не можете ответить");
+			inventory.push_back("Комплект обычной одежды");
+			cash.gold += 10;
+			skills.push_back("Исследователь");
+			endCycle = true;
+			break;
+		// Народный герой
+		case 7:
+			masterySkills.push_back("Выживание");
+			masterySkills.push_back("Уход за животными");
+			otherProficienciesAndLanguages["Инструменты"] = { "Один вид ремесленных инструментов", "Транспортное средство (наземное)" };
+			inventory.push_back("Ремесленный инструмент на выбор");
+			inventory.push_back("Лопата");
+			inventory.push_back("Железный горшок");
+			inventory.push_back("Комплект обычной одежды");
+			cash.gold += 10;
+			skills.push_back("Деревенское гостеприимство");
+			endCycle = true;
+			break;
+		// Отшельник
+		case 8:
+			masterySkills.push_back("Медицина");
+			masterySkills.push_back("Религия");
+			otherProficienciesAndLanguages["Инструменты"] = { "Набор травника" };
+			otherProficienciesAndLanguages["Языки"] = { "Один на выбор" };
+			inventory.push_back("Контейнер для свитков, битком набитый вашими молитвами и изысканиями");
+			inventory.push_back("Тёплое одеяло");
+			inventory.push_back("Комплект обычной одежды");
+			inventory.push_back("Набор травника");
+			cash.gold += 5;
+			skills.push_back("Откровение");
+			endCycle = true;
+			break;
+		// Пират
+		case 9:
+			masterySkills.push_back("Атлетика");
+			masterySkills.push_back("Восприятие");
+			otherProficienciesAndLanguages["Инструменты"] = { "Инструменты навигатора", "Транспорт (водяной)" };
+			inventory.push_back("Дубинка");
+			inventory.push_back("50 футов шёлковой верёвки");
+			inventory.push_back("Талисман");
+			inventory.push_back("Комплект обычной обежды");
+			cash.gold += 10;
+			skills.push_back("Дурная репутация");
+			endCycle = true;
+			break;
+		// Преступник
+		case 10:
+			masterySkills.push_back("Обман");
+			masterySkills.push_back("Скрытность");
+			otherProficienciesAndLanguages["Инструменты"] = { "Воровские инструменты", "Игровой набор на выбор" };
+			inventory.push_back("Ломик");
+			inventory.push_back("Ломик");
+			cash.gold += 15;
+			skills.push_back("Криминальные связи");
+			endCycle = true;
+			break;
+		// Прислужник
+		case 11:
+			masterySkills.push_back("Проницательность");
+			masterySkills.push_back("Религия");
+			otherProficienciesAndLanguages["Языки"] = { "Один на ваш выбор", "Один на ваш выбор" };
+			inventory.push_back("Священный символ");
+			inventory.push_back("Молитвенник или молитвенный барабан");
+			inventory.push_back("5 палочек благовоний");
+			inventory.push_back("Ряса");
+			inventory.push_back("Комплект обычной одежды");
+			cash.gold += 15;
+			skills.push_back("Приют для верующих");
+			endCycle = true;
+			break;
+		// Солдат
+		case 12:
+			masterySkills.push_back("Атлетика");
+			masterySkills.push_back("Запугивание");
+			otherProficienciesAndLanguages["Инструменты"] = { "Игровой набор на выбор", "Транспорт (сухопутный)" };
+			inventory.push_back("Знак отличия");
+			inventory.push_back("Трофей с убитого врага");
+			inventory.push_back("Набор игровых костей или колода карт");
+			inventory.push_back("Комплект обычной одежды");
+			cash.gold += 10;
+			skills.push_back("Воинское звание");
+			endCycle = true;
+			break;
+		// Чужеземец
+		case 13:
+			masterySkills.push_back("Атлетика");
+			masterySkills.push_back("Выживание");
+			otherProficienciesAndLanguages["Инструменты"] = { "Музыкальный инструмент на выбор" };
+			otherProficienciesAndLanguages["Языки"] = { "Один на выбор" };
+			inventory.push_back("Посох");
+			inventory.push_back("Капкан");
+			inventory.push_back("Трофей с убитого животного");
+			inventory.push_back("Комплект дорожной одежды");
+			cash.gold += 10;
+			skills.push_back("Странник");
+			endCycle = true;
+			break;
+		// Шарлатан
+		case 14:
+			masterySkills.push_back("Ловкость рук");
+			masterySkills.push_back("Обман");
+			otherProficienciesAndLanguages["Инструменты"] = { "Набор для грима", "Набор для фальсификации" };
+			inventory.push_back("Комплект отличной одежды");
+			inventory.push_back("Набор для грима");
+			inventory.push_back("Приспособление для жульничества на ваш выбор");
+			cash.gold += 15;
+			skills.push_back("Персонализация");
+			endCycle = true;
+			break;
 		}
-		
-		
-
-	} while (!(1 <= userInput <= BackgroundsVector.size()));
+	} while (!endCycle);
 }
 
 // Сделал Лев
