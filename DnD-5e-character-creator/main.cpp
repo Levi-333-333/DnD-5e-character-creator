@@ -10,12 +10,17 @@ void main()
 
 	Character character;
 
-	/*character.SetName();
+	character.SetName();
 	character.SetPlayerName();
-	character.SetRace();*/
+	character.SetCharacteristics();
+	character.SetCharacterClass();
+	character.SetRace();
 	character.SetBackground();
 	character.SetWorldview();
-	character.SetCharacteristics();
+	character.SetCharacterTraits();
+	character.SetIdeals();
+	character.SetAffections();
+	character.SetWeaknesses();
 
 	character.SetLevel(1);
 	character.SetModifficators();
@@ -23,5 +28,6 @@ void main()
 	character.SetPassivePerception();
 	character.SetClassArmor();
 	character.SetInitiative();
+
 	character.PrintInfo();
 }

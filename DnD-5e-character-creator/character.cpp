@@ -58,6 +58,28 @@ vector<string> CharacteristicsVector =
 	"Харизма" 
 };
 
+vector<string> SkillsVector = 
+{ 
+	"Акробатика", 
+	"Анализ", 
+	"Атлетика", 
+	"Восприятие", 
+	"Выживание", 
+	"Выступление", 
+	"Запугивание", 
+	"История", 
+	"Ловкость рук", 
+	"Магия", 
+	"Медицина", 
+	"Обман", 
+	"Природа", 
+	"Проницательность", 
+	"Религия", 
+	"Скрытность", 
+	"Убеждение", 
+	"Уход за животными" 
+};
+
 Characteristic::Characteristic()
 {
 	strength = 0;
@@ -77,7 +99,7 @@ Wallet::Wallet()
 	platinum = 0;
 }
 
-// Зона ответственноси Дарии
+
 void Character::PrintInfo()
 {
 	// Header
@@ -122,7 +144,109 @@ void Character::SetCharacterClass()
 	// Бард
 	if (chosenClass == 1)
 	{
-		// Зона ответственности Льва
+		maxHits = hitDice + characteristics.constitutionMod;
+		otherProficienciesAndLanguages["Доспехи"] = { "Лёгкие доспехи" };
+		otherProficienciesAndLanguages["Оружие"] = { "Простое оружие", "Длинный меч", "Короткий меч", "Рапиры", "Ручной арбалет" };
+		otherProficienciesAndLanguages["Инструменты"] = { "Музыкальный инструмент на выбор", "Музыкальный инструмент на выбор", "Музыкальный инструмент на выбор" };
+		savingThrowsSkills.push_back("Ловкость");
+		savingThrowsSkills.push_back("Харизма");
+
+		for (int i = 0; i < masterySkills.size(); i++)
+		{
+			for (int j = 0; j < SkillsVector.size(); j++)
+			{
+				if (masterySkills[i] == SkillsVector[j])
+				{
+					SkillsVector.erase(SkillsVector.begin() + j);
+					break;
+				}
+			}
+		}
+		for (int i = 0; i < 3; i++)
+		{
+			cout << "Выберите " << i + 1 << "-й навык (из 3-х) для изучения: " << endl;
+			for (int j = 1; j <= SkillsVector.size(); j++)
+			{
+				cout << j << ". " << SkillsVector[j - 1] << endl;
+			}
+			int chosenSkill;
+			cin >> chosenSkill;
+			if (chosenSkill <= SkillsVector.size())
+			{
+				skills.push_back(SkillsVector[chosenSkill - 1]);
+				SkillsVector.erase(SkillsVector.begin() + (chosenSkill - 1));
+			}
+			else
+			{
+				cout << "Неверный ввод. Попробуйте ещё раз" << endl;
+				i--;
+			}
+		}
+
+		int userInput;
+		cout << "Выберите 1 из 2-х:\n1) Выбрать начальное снаряжение\t2) Получить 5d4 * 10 золотых монет" << endl;
+		do
+		{
+			cin >> userInput;
+			switch (userInput)
+			{
+			case 1:
+				cout << "Выберите 1 из 3-х:\n1) Рапира\t2) Длинный меч\t3) Любое простое оружие" << endl;
+				int nestedUserInput;
+				do
+				{
+					cin >> nestedUserInput;
+					switch (nestedUserInput)
+					{
+					case 1:
+						inventory.push_back("Рапира");
+						break;
+					case 2:
+						inventory.push_back("Длинный меч");
+						break;
+					case 3:
+						inventory.push_back("Любое простое оружие");
+						break;
+					default:
+						cout << "Неверный ввод. Попробуйте ещё раз" << endl;
+					}
+				} while (!(1 <= nestedUserInput <= 3));
+
+				cout << "Выберите 1 из 2-х:\n1) Набор дипломата\t2) Набор артиста" << endl;
+				do
+				{
+					cin >> nestedUserInput;
+					switch (nestedUserInput)
+					{
+					case 1:
+						inventory.push_back("Набор дипломата");
+						break;
+					case 2:
+						inventory.push_back("Набор артиста");
+						break;
+					default:
+						cout << "Неверный ввод. Попробуйте ещё раз" << endl;
+					}
+				} while (!(1 <= nestedUserInput <= 2));
+
+				inventory.push_back("Любой музыкальный инструмент");
+				inventory.push_back("Кожаный доспех");
+				inventory.push_back("Кинжал");
+
+				skills.push_back("Использование заклинаний");
+				skills.push_back("Вдохновение барда (к6)");
+			case 2:
+				cash.gold += (D4, D4, D4, D4, D4) * 10;
+				break;
+			default:
+				cout << "Неверный ввод. Попробуйте ещё раз" << endl;
+			}
+		} while (!(1 <= userInput <= 2));
+	}
+	// Варвар
+	else if (chosenClass == 2)
+	{
+
 	}
 }
 
@@ -1202,17 +1326,25 @@ void Character::SetClassArmor()
 // Сделала Рия
 void Character::SetCharacterTraits()
 {
+	cout << "Введите черты характера: " << endl;
 	getline(cin, characterTraits);
+	cout << endl;
 }
 void Character::SetIdeals()
 {
+	cout << "Введите черты характера: " << endl;
 	getline(cin, ideals);
+	cout << endl;
 }
 void Character::SetAffections()
 {
+	cout << "Введите черты характера: " << endl;
 	getline(cin, affections);
+	cout << endl;
 }
 void Character::SetWeaknesses()
 {
+	cout << "Введите черты характера: " << endl;
 	getline(cin, weaknesses);
+	cout << endl;
 }

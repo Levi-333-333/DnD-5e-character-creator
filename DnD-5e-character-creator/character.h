@@ -9,6 +9,8 @@ using namespace std;
 extern vector<string> ClassesVector;
 extern vector<string> RacesVector;
 extern vector<string> BackgroundsVector;
+extern vector<string> CharacteristicsVector;
+extern vector<string> SkillsVector;
 
 struct Characteristic
 {
