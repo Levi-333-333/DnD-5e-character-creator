@@ -6,6 +6,13 @@
 #include "dice.h"
 using namespace std;
 
+#define strength characteristics.characteristics["Сила"]
+#define dexterity characteristics.characteristics["Ловкость"]
+#define constitution characteristics.characteristics["Телосложение"]
+#define intelligence characteristics.characteristics["Интеллект"]
+#define wisdom characteristics.characteristics["Мудрость"]
+#define charisma characteristics.characteristics["Харизма"]
+
 extern vector<string> ClassesVector;
 extern vector<string> RacesVector;
 extern vector<string> BackgroundsVector;
@@ -14,12 +21,7 @@ extern vector<string> SkillsVector;
 
 struct Characteristic
 {
-	int strength;
-	int dexterity;
-	int constitution;
-	int intelligence;
-	int wisdom;
-	int charisma;
+	map<string, int> characteristics;
 
 	int strengthMod;
 	int dexterityMod;

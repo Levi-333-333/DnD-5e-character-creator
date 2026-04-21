@@ -82,12 +82,12 @@ vector<string> SkillsVector =
 
 Characteristic::Characteristic()
 {
-	strength = 0;
-	dexterity = 0;
-	constitution = 0;
-	intelligence = 0;
-	wisdom = 0;
-	charisma = 0;
+	characteristics["Сила"] = 0;
+	characteristics["Ловкость"] = 0;
+	characteristics["Телосложение"] = 0;
+	characteristics["Интеллект"] = 0;
+	characteristics["Мудрость"] = 0;
+	characteristics["Харизма"] = 0;
 }
 
 Wallet::Wallet()
@@ -261,7 +261,7 @@ void Character::SetRace()
 	// Гном
 	if (userInput == 1)
 	{
-		characteristics.intelligence += 2;
+		characteristics.characteristics["Интелект"] += 2;
 		speed = 25;
 		otherProficienciesAndLanguages["Языки"] = { "Общий", "Гномий" };
 		otherProficienciesAndLanguages["Тёмное зрение"] = { "60 футов" };
@@ -276,12 +276,12 @@ void Character::SetRace()
 			switch (raceChoise)
 			{	
 			case 1:
-				characteristics.dexterity += 1;
+				dexterity += 1;
 				skills.push_back("Природная иллюзия");
 				skills.push_back("Общение с маленькими зверями");
 				break;
 			case 2:
-				characteristics.constitution += 1;
+				constitution += 1;
 				skills.push_back("Ремесленные знания");
 				skills.push_back("Жестянщик");
 				break;
@@ -294,7 +294,7 @@ void Character::SetRace()
 	// Дварф
 	else if (userInput == 2)
 	{
-		characteristics.constitution += 2;
+		constitution += 2;
 		speed = 25;
 		otherProficienciesAndLanguages["Тёмное зрение"] = { "60 футов" };
 		skills.push_back("Дварфийская устойчивость");
@@ -334,11 +334,11 @@ void Character::SetRace()
 			switch (raceChoise)
 			{
 			case 1:
-				characteristics.strength += 2;
+				strength += 2;
 				otherProficienciesAndLanguages["Доспехи"] = { "Лёгкие доспехи", "Средние доспехи" };
 				break;
 			case 2:
-				characteristics.wisdom += 1;
+				wisdom += 1;
 				skills.push_back("Дварфийская выдержка");
 				maxHits += 1;
 				break;
@@ -351,8 +351,8 @@ void Character::SetRace()
 	// Драконорождённый
 	else if (userInput == 3)
 	{
-		characteristics.strength += 2;
-		characteristics.charisma += 1;
+		strength += 2;
+		charisma += 1;
 		speed = 30;
 		otherProficienciesAndLanguages["Языки"] = { "Общий", "Драконий" };
 
@@ -413,8 +413,8 @@ void Character::SetRace()
 	// Полуорк
 	else if (userInput == 4)
 	{
-		characteristics.strength += 2;
-		characteristics.constitution += 1;
+		strength += 2;
+		constitution += 1;
 		speed = 30;
 		otherProficienciesAndLanguages["Тёмное зрение"] = { "60 футов" };
 		masterySkills.push_back("Запугивание");
@@ -426,7 +426,7 @@ void Character::SetRace()
 	// Полурослик
 	else if (userInput == 5)
 	{
-		characteristics.dexterity += 2;
+		dexterity += 2;
 		speed = 25;
 		skills.push_back("Везучий");
 		skills.push_back("Храбрый");
@@ -442,11 +442,11 @@ void Character::SetRace()
 			switch (raceChoise)
 			{
 			case 1:
-				characteristics.constitution += 1;
+				constitution += 1;
 				skills.push_back("Устойчивость коренастых");
 				break;
 			case 2:
-				characteristics.charisma += 1;
+				charisma += 1;
 				skills.push_back("Естественная скрытность");
 				break;
 			default:
@@ -460,7 +460,7 @@ void Character::SetRace()
 	{
 		// Выбор характеристик
 		vector<string> characteristicsForHalfelf = { "Сила", "Ловкость", "Телосложение", "Интелект", "Мудрость" };
-		characteristics.charisma += 2;
+		charisma += 2;
 		
 		int userCharacteristicChoise;
 		for (int i = 0; i < 2; i++)
@@ -483,27 +483,27 @@ void Character::SetRace()
 
 			if (chosenCharacteriscic == "Сила")
 			{
-				characteristics.strength += 1;
+				strength += 1;
 				characteristicsForHalfelf.erase(characteristicsForHalfelf.begin() + (userCharacteristicChoise - 1));
 			}
 			else if (chosenCharacteriscic == "Ловкость") 
 			{
-				characteristics.dexterity += 1;
+				dexterity += 1;
 				characteristicsForHalfelf.erase(characteristicsForHalfelf.begin() + (userCharacteristicChoise - 1));
 			}
 			else if (chosenCharacteriscic == "Телосложение") 
 			{
-				characteristics.constitution += 1;
+				constitution += 1;
 				characteristicsForHalfelf.erase(characteristicsForHalfelf.begin() + (userCharacteristicChoise - 1));
 			}
 			else if (chosenCharacteriscic == "Интелект") 
 			{
-				characteristics.intelligence += 1;
+				intelligence += 1;
 				characteristicsForHalfelf.erase(characteristicsForHalfelf.begin() + (userCharacteristicChoise - 1));
 			}
 			else if (chosenCharacteriscic == "Мудрость")
 			{
-				characteristics.wisdom += 1;
+				wisdom += 1;
 				characteristicsForHalfelf.erase(characteristicsForHalfelf.begin() + (userCharacteristicChoise - 1));
 			}
 			
@@ -555,8 +555,8 @@ void Character::SetRace()
 	// Тифлинг
 	else if (userInput == 7)
 	{
-		characteristics.intelligence += 1;
-		characteristics.charisma += 2;
+		intelligence += 1;
+		charisma += 2;
 		speed = 30;
 		otherProficienciesAndLanguages["Тёмное зрение"] = { "60 футов" };
 		skills.push_back("Адское сопротивление");
@@ -578,12 +578,12 @@ void Character::SetRace()
 			{
 			// Человек обычный
 			case 1:
-				characteristics.strength += 1;
-				characteristics.dexterity += 1;
-				characteristics.constitution += 1;
-				characteristics.intelligence += 1;
-				characteristics.wisdom += 1;
-				characteristics.charisma += 1;
+				strength += 1;
+				dexterity += 1;
+				constitution += 1;
+				intelligence += 1;
+				wisdom += 1;
+				charisma += 1;
 				speed = 30;
 				otherProficienciesAndLanguages["Языки"] = { "Общий", "Любой на выбор" };
 				break;
@@ -610,36 +610,39 @@ void Character::SetRace()
 
 					string chosenCharacteriscic = CharacteristicsVector[userCharacteristicChoise - 1];
 
-					if (chosenCharacteriscic == "Сила")
-					{
-						characteristics.strength += 1;
-						CharacteristicsVector.erase(CharacteristicsVector.begin() + (userCharacteristicChoise - 1));
-					}
-					else if (chosenCharacteriscic == "Ловкость")
-					{
-						characteristics.dexterity += 1;
-						CharacteristicsVector.erase(CharacteristicsVector.begin() + (userCharacteristicChoise - 1));
-					}
-					else if (chosenCharacteriscic == "Телосложение")
-					{
-						characteristics.constitution += 1;
-						CharacteristicsVector.erase(CharacteristicsVector.begin() + (userCharacteristicChoise - 1));
-					}
-					else if (chosenCharacteriscic == "Интелект")
-					{
-						characteristics.intelligence += 1;
-						CharacteristicsVector.erase(CharacteristicsVector.begin() + (userCharacteristicChoise - 1));
-					}
-					else if (chosenCharacteriscic == "Мудрость")
-					{
-						characteristics.wisdom += 1;
-						CharacteristicsVector.erase(CharacteristicsVector.begin() + (userCharacteristicChoise - 1));
-					}
-					else if (chosenCharacteriscic == "Харизма")
-					{
-						characteristics.charisma += 1;
-						CharacteristicsVector.erase(CharacteristicsVector.begin() + (userCharacteristicChoise - 1));
-					}
+					characteristics.characteristics[chosenCharacteriscic] += 1;
+					CharacteristicsVector.erase(CharacteristicsVector.begin() + (userCharacteristicChoise - 1));
+
+					//if (chosenCharacteriscic == "Сила")
+					//{
+					//	strength += 1;
+					//	CharacteristicsVector.erase(CharacteristicsVector.begin() + (userCharacteristicChoise - 1));
+					//}
+					//else if (chosenCharacteriscic == "Ловкость")
+					//{
+					//	dexterity += 1;
+					//	CharacteristicsVector.erase(CharacteristicsVector.begin() + (userCharacteristicChoise - 1));
+					//}
+					//else if (chosenCharacteriscic == "Телосложение")
+					//{
+					//	constitution += 1;
+					//	CharacteristicsVector.erase(CharacteristicsVector.begin() + (userCharacteristicChoise - 1));
+					//}
+					//else if (chosenCharacteriscic == "Интелект")
+					//{
+					//	intelligence += 1;
+					//	CharacteristicsVector.erase(CharacteristicsVector.begin() + (userCharacteristicChoise - 1));
+					//}
+					//else if (chosenCharacteriscic == "Мудрость")
+					//{
+					//	wisdom += 1;
+					//	CharacteristicsVector.erase(CharacteristicsVector.begin() + (userCharacteristicChoise - 1));
+					//}
+					//else if (chosenCharacteriscic == "Харизма")
+					//{
+					//	charisma += 1;
+					//	CharacteristicsVector.erase(CharacteristicsVector.begin() + (userCharacteristicChoise - 1));
+					//}
 				}
 
 				//Убираем из списка выше все навыки, которые уже есть у персонажа
@@ -685,7 +688,7 @@ void Character::SetRace()
 	// Эльф
 	else if (userInput == 9)
 	{
-		characteristics.dexterity += 2;
+		dexterity += 2;
 		speed = 30;
 		masterySkills.push_back("Восприятие");
 		skills.push_back("Наследие фей");
@@ -702,20 +705,20 @@ void Character::SetRace()
 			{
 			case 1:
 				otherProficienciesAndLanguages["Тёмное зрение"] = { "60 футов" };
-				characteristics.intelligence += 1;
+				intelligence += 1;
 				otherProficienciesAndLanguages["Оружие"] = { "Длинный меч", "Короткий меч", "Длинный лук", "Короткий лук" };
 				skills.push_back("Заговор");
 				otherProficienciesAndLanguages["Языки"] = { "Любой на выбор" };
 				break;
 			case 2:
 				otherProficienciesAndLanguages["Тёмное зрение"] = { "60 футов" };
-				characteristics.wisdom += 1;
+				wisdom += 1;
 				otherProficienciesAndLanguages["Оружие"] = { "Длинный меч", "Короткий меч", "Длинный лук", "Короткий лук" };
 				speed = 35;
 				skills.push_back("Маскировка в дикой местности");
 				break;
 			case 3:
-				characteristics.charisma += 1;
+				charisma += 1;
 				otherProficienciesAndLanguages["Тёмное зрение"] = { "120 футов" };
 				skills.push_back("Чувствительность к солнцу");
 				skills.push_back("Магия дроу");
@@ -1088,37 +1091,37 @@ void Character::SetCharacteristics()
 
 				if (chosenCharacteristicsString == "Сила")
 				{
-					characteristics.strength += chosenValue;
+					strength += chosenValue;
 					CharacteristicsVector.erase(CharacteristicsVector.begin() + (chosenCharacteristics - 1));
 					standartChars.erase(standartChars.begin() + (chosenValueI - 1));
 				}
 				else if (chosenCharacteristicsString == "Ловкость")
 				{
-					characteristics.dexterity += chosenValue;
+					dexterity += chosenValue;
 					CharacteristicsVector.erase(CharacteristicsVector.begin() + (chosenCharacteristics - 1));
 					standartChars.erase(standartChars.begin() + (chosenValueI - 1));
 				}
 				else if (chosenCharacteristicsString == "Телосложение")
 				{
-					characteristics.constitution += chosenValue;
+					constitution += chosenValue;
 					CharacteristicsVector.erase(CharacteristicsVector.begin() + (chosenCharacteristics - 1));
 					standartChars.erase(standartChars.begin() + (chosenValueI - 1));
 				}
 				else if (chosenCharacteristicsString == "Интелект")
 				{
-					characteristics.intelligence += chosenValue;
+					intelligence += chosenValue;
 					CharacteristicsVector.erase(CharacteristicsVector.begin() + (chosenCharacteristics - 1));
 					standartChars.erase(standartChars.begin() + (chosenValueI - 1));
 				}
 				else if (chosenCharacteristicsString == "Мудрость")
 				{
-					characteristics.wisdom += chosenValue;
+					wisdom += chosenValue;
 					CharacteristicsVector.erase(CharacteristicsVector.begin() + (chosenCharacteristics - 1));
 					standartChars.erase(standartChars.begin() + (chosenValueI - 1));
 				}
 				else if (chosenCharacteristicsString == "Харизма")
 				{
-					characteristics.charisma += chosenValue;
+					charisma += chosenValue;
 					CharacteristicsVector.erase(CharacteristicsVector.begin() + (chosenCharacteristics - 1));
 					standartChars.erase(standartChars.begin() + (chosenValueI - 1));
 				}
@@ -1196,37 +1199,37 @@ void Character::SetCharacteristics()
 
 				if (chosenCharacteristicsString == "Сила")
 				{
-					characteristics.strength += chosenValue;
+					strength += chosenValue;
 					CharacteristicsVector.erase(CharacteristicsVector.begin() + (chosenCharacteristics - 1));
 					randomChars.erase(randomChars.begin() + (chosenValueI - 1));
 				}
 				else if (chosenCharacteristicsString == "Ловкость")
 				{
-					characteristics.dexterity += chosenValue;
+					dexterity += chosenValue;
 					CharacteristicsVector.erase(CharacteristicsVector.begin() + (chosenCharacteristics - 1));
 					randomChars.erase(randomChars.begin() + (chosenValueI - 1));
 				}
 				else if (chosenCharacteristicsString == "Телосложение")
 				{
-					characteristics.constitution += chosenValue;
+					constitution += chosenValue;
 					CharacteristicsVector.erase(CharacteristicsVector.begin() + (chosenCharacteristics - 1));
 					randomChars.erase(randomChars.begin() + (chosenValueI - 1));
 				}
 				else if (chosenCharacteristicsString == "Интелект")
 				{
-					characteristics.intelligence += chosenValue;
+					intelligence += chosenValue;
 					CharacteristicsVector.erase(CharacteristicsVector.begin() + (chosenCharacteristics - 1));
 					randomChars.erase(randomChars.begin() + (chosenValueI - 1));
 				}
 				else if (chosenCharacteristicsString == "Мудрость")
 				{
-					characteristics.wisdom += chosenValue;
+					wisdom += chosenValue;
 					CharacteristicsVector.erase(CharacteristicsVector.begin() + (chosenCharacteristics - 1));
 					randomChars.erase(randomChars.begin() + (chosenValueI - 1));
 				}
 				else if (chosenCharacteristicsString == "Харизма")
 				{
-					characteristics.charisma += chosenValue;
+					charisma += chosenValue;
 					CharacteristicsVector.erase(CharacteristicsVector.begin() + (chosenCharacteristics - 1));
 					randomChars.erase(randomChars.begin() + (chosenValueI - 1));
 				}
@@ -1242,12 +1245,12 @@ void Character::SetCharacteristics()
 // Сделал Лев
 void Character::SetModifficators()
 {
-	characteristics.strengthMod = (characteristics.strength - 10) / 2;
-	characteristics.dexterityMod = (characteristics.dexterity - 10) / 2;
-	characteristics.constitutionMod = (characteristics.constitution - 10) / 2;
-	characteristics.intelligenceMod = (characteristics.intelligence - 10) / 2;
-	characteristics.wisdomMod = (characteristics.wisdom - 10) / 2;
-	characteristics.charismaMod = (characteristics.charisma - 10) / 2;
+	characteristics.strengthMod = (strength - 10) / 2;
+	characteristics.dexterityMod = (dexterity - 10) / 2;
+	characteristics.constitutionMod = (constitution - 10) / 2;
+	characteristics.intelligenceMod = (intelligence - 10) / 2;
+	characteristics.wisdomMod = (wisdom - 10) / 2;
+	characteristics.charismaMod = (charisma - 10) / 2;
 }
 
 // Сделала Рия
@@ -1258,8 +1261,8 @@ void Character::SetPassivePerception()
 	{
 		if (inventory[i] == "Восприятие") havePerception = true;
 	}
-	if (havePerception) passivePerception = 10 + characteristics.wisdom + masteryBonus;
-	else passivePerception = 10 + characteristics.wisdom;
+	if (havePerception) passivePerception = 10 + wisdom + masteryBonus;
+	else passivePerception = 10 + wisdom;
 }
 
 // Сделала Рия
@@ -1344,12 +1347,12 @@ void Character::PrintInfo()
 	cout << "Имя персонажа: " << name << "\t\t Класс: " << characterClass << "   Предыстория: " << background << "   Имя игрока:" << playerName << endl;
 	cout << "\t\t" << "Раса: " << race << "   Мировоззрение: " << worldview << "   Опыт: " << experience << "   Уровень: " << level << endl << endl;
 
-	cout << "Сила\n" << characteristics.strength << endl << "(" << characteristics.strengthMod << ")" << endl;
-	cout << "Ловкость\n" << characteristics.dexterity << endl << "(" << characteristics.dexterityMod << ")" << endl;
-	cout << "Телосложение\n" << characteristics.constitution << endl << "(" << characteristics.constitutionMod << ")" << endl;
-	cout << "Интелект\n" << characteristics.intelligence << endl << "(" << characteristics.intelligenceMod << ")" << endl;
-	cout << "Мудрость\n" << characteristics.wisdom << endl << "(" << characteristics.wisdomMod << ")" << endl;
-	cout << "Харизма\n" << characteristics.charisma << endl << "(" << characteristics.charismaMod << ")" << endl << endl;
+	cout << "Сила\n" << strength << endl << "(" << characteristics.strengthMod << ")" << endl;
+	cout << "Ловкость\n" << dexterity << endl << "(" << characteristics.dexterityMod << ")" << endl;
+	cout << "Телосложение\n" << constitution << endl << "(" << characteristics.constitutionMod << ")" << endl;
+	cout << "Интелект\n" << intelligence << endl << "(" << characteristics.intelligenceMod << ")" << endl;
+	cout << "Мудрость\n" << wisdom << endl << "(" << characteristics.wisdomMod << ")" << endl;
+	cout << "Харизма\n" << charisma << endl << "(" << characteristics.charismaMod << ")" << endl << endl;
 
 	cout << "Бонус мастерства: +" << masteryBonus << endl;
 
