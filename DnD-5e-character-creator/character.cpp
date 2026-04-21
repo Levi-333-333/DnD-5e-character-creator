@@ -578,12 +578,7 @@ void Character::SetRace()
 			{
 			// „еловек обычный
 			case 1:
-				strength += 1;
-				dexterity += 1;
-				constitution += 1;
-				intelligence += 1;
-				wisdom += 1;
-				charisma += 1;
+				for (int i = 0; i < CharacteristicsVector.size(); i++) characteristics.characteristics[CharacteristicsVector[i]] += 1;
 				speed = 30;
 				otherProficienciesAndLanguages["языки"] = { "ќбщий", "Ћюбой на выбор" };
 				break;
