@@ -44,47 +44,9 @@ struct Wallet
 	Wallet();
 };
 
-struct Character
+class Header
 {
-	// Header
-	string name;
-	string characterClass;
-	string race;
-	string background;
-	string worldview;
-	string playerName;
-	int experience;
-	int level;
-
-	// Left part of character's list
-	Characteristic characteristics;
-	int masteryBonus;
-	vector<string> masterySkills;
-	vector<string> savingThrowsSkills;
-	bool inspiration;
-	int passivePerception;
-	map<string, vector<string>> otherProficienciesAndLanguages;
-
-	// Center part of character's list
-	int classArmor;
-	int initiative;
-	int speed;
-	int maxHits;
-	int hitDice;
-	Wallet cash;
-	vector<string> inventory;
-
-	// Right part of character's list
-	string characterTraits;
-	string ideals;
-	string affections;
-	string weaknesses;
-	vector<string> skills;
-
-	// Functions
-	void PrintInfo();
-
-	// Functions for header
+public:
 	void SetName();
 	void SetCharacterClass();
 	void SetRace();
@@ -93,19 +55,77 @@ struct Character
 	void SetPlayerName();
 	void SetExperience(); // Пока программа не подразумевает лвлапы и/или создание персонажа уровня выше первого ф-я выполняется перед вызовом ф-ии PrintInfo() 
 	void SetLevel(int _level); // Пока программа не подразумевает лвлапы и/или создание персонажа уровня выше первого ф-я выполняется перед вызовом ф-ии PrintInfo() со значением 1. Приоритетнее всех
+private:
+	string name;
+	string characterClass;
+	string race;
+	string background;
+	string worldview;
+	string playerName;
+	int experience;
+	int level;
+};
 
-	// Functions for left part of character's list
+class LeftPart
+{
+public:
 	void SetCharacteristics();
 	void SetPassivePerception(); // Ф-я выполняется перед вызовом ф-ии PrintInfo()
 	void SetModifficators(); // Ф-я выполняется перед вызовом ф-ии PrintInfo() приоритетнее всех других подобных функций, кроме SetLevel
+private:
+	Characteristic characteristics;
+	int masteryBonus;
+	vector<string> masterySkills;
+	vector<string> savingThrowsSkills;
+	bool inspiration;
+	int passivePerception;
+	map<string, vector<string>> otherProficienciesAndLanguages;
+};
 
-	// Functions for Center part of character's list
+class CenterPart
+{
+public:
 	void SetClassArmor(); // Ф-я выполняется перед вызовом ф-ии PrintInfo()
 	void SetInitiative(); // Ф-я выполняется перед вызовом ф-ии PrintInfo()
+private:
+	int classArmor;
+	int initiative;
+	int speed;
+	int maxHits;
+	int hitDice;
+	Wallet cash;
+	vector<string> inventory;
+};
 
-	// Functions for right part of character's list
+class RightPart
+{
+public:
 	void SetCharacterTraits();
 	void SetIdeals();
 	void SetAffections();
 	void SetWeaknesses();
+private:
+	string characterTraits;
+	string ideals;
+	string affections;
+	string weaknesses;
+	vector<string> skills;
 };
+
+struct Character
+{
+	// Header
+	Header header;
+
+	// Left part of character's list
+	LeftPart leftPart;
+
+	// Center part of character's list
+	CenterPart centerPart;
+
+	// Right part of character's list
+	RightPart rightPart;
+
+	// Functions
+	void PrintInfo();	
+};	
