@@ -44,6 +44,7 @@ struct Wallet
 	Wallet();
 };
 
+//...
 class Header
 {
 public:
