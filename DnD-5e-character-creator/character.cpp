@@ -240,7 +240,6 @@ void Character::SetCharacterClass()
 	}
 }
 
-// Сделал Лев
 void Character::SetRace()
 {
 	cout << "Введите одну из предложенных рас (цифрой)" << endl;
@@ -584,7 +583,7 @@ void Character::SetRace()
 				break;
 			// Человек альтернативный
 			case 2:
-				// Хахахахахарактеристика (я схожу с ума)
+				// Характеристика
 				int userCharacteristicChoise;
 
 				for (int i = 0; i < 2; i++)
@@ -607,37 +606,6 @@ void Character::SetRace()
 
 					characteristics.characteristics[chosenCharacteriscic] += 1;
 					CharacteristicsVector.erase(CharacteristicsVector.begin() + (userCharacteristicChoise - 1));
-
-					//if (chosenCharacteriscic == "Сила")
-					//{
-					//	strength += 1;
-					//	CharacteristicsVector.erase(CharacteristicsVector.begin() + (userCharacteristicChoise - 1));
-					//}
-					//else if (chosenCharacteriscic == "Ловкость")
-					//{
-					//	dexterity += 1;
-					//	CharacteristicsVector.erase(CharacteristicsVector.begin() + (userCharacteristicChoise - 1));
-					//}
-					//else if (chosenCharacteriscic == "Телосложение")
-					//{
-					//	constitution += 1;
-					//	CharacteristicsVector.erase(CharacteristicsVector.begin() + (userCharacteristicChoise - 1));
-					//}
-					//else if (chosenCharacteriscic == "Интелект")
-					//{
-					//	intelligence += 1;
-					//	CharacteristicsVector.erase(CharacteristicsVector.begin() + (userCharacteristicChoise - 1));
-					//}
-					//else if (chosenCharacteriscic == "Мудрость")
-					//{
-					//	wisdom += 1;
-					//	CharacteristicsVector.erase(CharacteristicsVector.begin() + (userCharacteristicChoise - 1));
-					//}
-					//else if (chosenCharacteriscic == "Харизма")
-					//{
-					//	charisma += 1;
-					//	CharacteristicsVector.erase(CharacteristicsVector.begin() + (userCharacteristicChoise - 1));
-					//}
 				}
 
 				//Убираем из списка выше все навыки, которые уже есть у персонажа
@@ -726,7 +694,6 @@ void Character::SetRace()
 	}
 }
 
-// Сделала Рия
 void Character::SetBackground()
 {
 	cout << "Выберите предысторию (цифрой): " << endl;
@@ -956,7 +923,6 @@ void Character::SetBackground()
 	} while (!endCycle);
 }
 
-// Сделал Лев
 void Character::SetWorldview()
 {
 	int userInput;
@@ -999,7 +965,6 @@ void Character::SetWorldview()
 	} while (!(1 <= userInput <= 9));
 }
 
-// Сделал Лев
 void Character::SetPlayerName()
 {
 	cout << "Введите ваше имя: ";
@@ -1007,14 +972,12 @@ void Character::SetPlayerName()
 	cout << endl;
 }
 
-// Сделал Лев
 void Character::SetExperience()
 {
 	// Так как программа ещё не подразумевает левелапы и т.п. вот так вот
 	experience = 0;
 }
 
-// Сделал Лев
 void Character::SetLevel(int _level)
 {
 	level = _level;
@@ -1027,7 +990,6 @@ void Character::SetLevel(int _level)
 	else if (17 <= level <= 20) masteryBonus = 6;
 }
 
-// Сделал Лев
 void Character::SetCharacteristics()
 {
 	int userInput;
@@ -1237,7 +1199,6 @@ void Character::SetCharacteristics()
 	} while (!(1 <= userInput <= 2));
 }
 
-// Сделал Лев
 void Character::SetModifficators()
 {
 	characteristics.strengthMod = (strength - 10) / 2;
@@ -1248,7 +1209,6 @@ void Character::SetModifficators()
 	characteristics.charismaMod = (charisma - 10) / 2;
 }
 
-// Сделала Рия
 void Character::SetPassivePerception()
 {
 	bool havePerception = false;
@@ -1260,13 +1220,11 @@ void Character::SetPassivePerception()
 	else passivePerception = 10 + wisdom;
 }
 
-// Сделала Рия
 void Character::SetInitiative()
 {
 	initiative = characteristics.dexterityMod;
 }
 
-// Сделала Рия
 void Character::SetClassArmor()
 {
 	for (int i = 0; i < inventory.size(); i++)
@@ -1311,7 +1269,6 @@ void Character::SetClassArmor()
 	}
 }
 
-// Сделала Рия
 void Character::SetCharacterTraits()
 {
 	cout << "Введите черты характера: " << endl;
