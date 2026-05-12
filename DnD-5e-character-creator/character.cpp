@@ -124,16 +124,11 @@ void Character::SetCharacterClass()
 
 	characterClass = ClassesVector[chosenClass - 1];
 
-	// Добавление кости хитов в зависимости от класса
-	if (chosenClass == 4 || chosenClass == 13) hitDice = 6;
-	else if (chosenClass == 1 || chosenClass == 5 || chosenClass == 6 || chosenClass == 7 || chosenClass == 8 || chosenClass == 9 || chosenClass == 11) hitDice = 8;
-	else if (chosenClass == 3 || chosenClass == 10 || chosenClass == 12) hitDice = 10;
-	else if (chosenClass == 2) hitDice = 12;
-
 	// Добавление всего от класса
 	// Бард
 	if (chosenClass == 1)
 	{
+		hitDice = 8;
 		maxHits = hitDice + characteristics.constitutionMod;
 		otherProficienciesAndLanguages["Доспехи"] = { "Лёгкие доспехи" };
 		otherProficienciesAndLanguages["Оружие"] = { "Простое оружие", "Длинный меч", "Короткий меч", "Рапиры", "Ручной арбалет" };
@@ -480,32 +475,8 @@ void Character::SetRace()
 
 			string chosenCharacteriscic = characteristicsForHalfelf[userCharacteristicChoise - 1];
 
-			if (chosenCharacteriscic == "Сила")
-			{
-				strength += 1;
-				characteristicsForHalfelf.erase(characteristicsForHalfelf.begin() + (userCharacteristicChoise - 1));
-			}
-			else if (chosenCharacteriscic == "Ловкость") 
-			{
-				dexterity += 1;
-				characteristicsForHalfelf.erase(characteristicsForHalfelf.begin() + (userCharacteristicChoise - 1));
-			}
-			else if (chosenCharacteriscic == "Телосложение") 
-			{
-				constitution += 1;
-				characteristicsForHalfelf.erase(characteristicsForHalfelf.begin() + (userCharacteristicChoise - 1));
-			}
-			else if (chosenCharacteriscic == "Интелект") 
-			{
-				intelligence += 1;
-				characteristicsForHalfelf.erase(characteristicsForHalfelf.begin() + (userCharacteristicChoise - 1));
-			}
-			else if (chosenCharacteriscic == "Мудрость")
-			{
-				wisdom += 1;
-				characteristicsForHalfelf.erase(characteristicsForHalfelf.begin() + (userCharacteristicChoise - 1));
-			}
-			
+			characteristics.characteristics[chosenCharacteriscic] += 1;
+			characteristicsForHalfelf.erase(characteristicsForHalfelf.begin() + (userCharacteristicChoise - 1));
 		}
 
 		//Выбор навыков
